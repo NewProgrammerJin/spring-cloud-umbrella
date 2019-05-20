@@ -1,0 +1,22 @@
+#自定义端口
+server:
+  port: 9095
+spring:
+  application:
+    name: user-consumer
+#数据源配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+#EUREKA配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@47.107.137.244:10086/eureka/,http://admin:admin@47.107.137.244:10085/eureka/    #注册服务器IP
+    fetch-registry: true
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}

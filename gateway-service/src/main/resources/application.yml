@@ -1,0 +1,41 @@
+server:
+  port: 10085
+spring:
+  cloud:
+    gateway:
+     discovery:
+        locator:
+         enabled: true
+     routes:
+        - id: USER-CONSUMER
+          uri: lb://USER-CONSUMER
+          predicates:
+           - Path=/USER-CONSUMER/**
+          filters:
+            - SwaggerHeaderFilter
+              #- StripPrefix=1
+#
+
+  application:
+    name: gateway-service
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+#      roles: admin
+#EUREKA配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@47.107.137.244:10086/eureka/,http://admin:admin@47.107.137.244:10085/eureka/    #注册服务器IP
+    fetch-registry: true
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+
+
