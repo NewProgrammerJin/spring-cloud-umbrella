@@ -1,0 +1,28 @@
+#自定义端口
+server:
+  port: 10010
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/NewProgrammerJin/spring-cloud-config
+          search-paths: user-config*
+          username: 1136817782@qq.com
+          password: aa5754581
+      label: master
+      enabled: true
+#EUREKA配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@47.107.137.244:10086/eureka/,http://admin:admin@47.107.137.244:10085/eureka/    #注册服务器IP
+    fetch-registry: true
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+

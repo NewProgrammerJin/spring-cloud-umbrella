@@ -1,19 +1,15 @@
 #自定义端口
 server:
-  port: 10010
+  port: 7002
 spring:
   application:
-    name: config-service
+    name: user-peer1
   cloud:
     config:
-      server:
-        git:
-          uri: https://github.com/NewProgrammerJin/spring-cloud-config.git
-          search-paths: /.//{application}
-          username: 1136817782@qq.com
-          password: aa5754581
-      label: master
-      enabled: true
+      profile: peer1
+      discovery:
+        service-id: config-service
+        enabled: true
 #EUREKA配置
 eureka:
   client:
@@ -25,4 +21,3 @@ eureka:
     lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${server.port}
-

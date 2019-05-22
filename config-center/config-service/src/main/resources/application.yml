@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    # 根据不同环境切换：dev 开发环境，test 测试环境，prod 上线环境
+    active: peer1
